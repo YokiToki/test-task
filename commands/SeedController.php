@@ -9,6 +9,7 @@ namespace app\commands;
 
 use yii\console\Controller;
 use app\models\Counters;
+use app\models\Values;
 
 /**
  * This command echoes the first argument that you have entered.
@@ -33,10 +34,26 @@ class SeedController extends Controller
         {
             $counter->setIsNewRecord(true);
             $counter->Counter_id = null;
-            $counter->Serial_number = $faker->numberBetween(100,120);
+            $counter->Serial_number = $i + 99;
             $counter->Name = $faker->name;
             $counter->Date_install = null;
             $counter->save(false);
+        }
+    }
+
+    public function actionValues()
+    {
+        $faker = \Faker\Factory::create();
+
+        $value = new Values();
+        for ( $i = 1; $i <= 20; $i++ )
+        {
+            $value->setIsNewRecord(true);
+            $value->Value_id = null;
+            $value->Counter_id = $faker->numberBetween(1, 5);
+            $value->Value = $faker->randomFloat($nbMaxDecimals = 3, $min = 20, $max = 300);
+            $value->Date = null;
+            $value->save(false);
         }
     }
 }
