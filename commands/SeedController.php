@@ -46,12 +46,20 @@ class SeedController extends Controller
         $faker = \Faker\Factory::create();
 
         $value = new Values();
+        $values = [];
         for ( $i = 1; $i <= 20; $i++ )
         {
+            $counter_id = $faker->numberBetween(1, 5);
+            $min_value = 20;
+            if(isset($values[$counter_id])) {
+                $min_value = max($values[$counter_id]);
+            }
+            $current_value = $faker->randomFloat($nbMaxDecimals = 3, $min = $min_value, $max = 300);
+            $values[$counter_id][] = $current_value;
             $value->setIsNewRecord(true);
             $value->Value_id = null;
-            $value->Counter_id = $faker->numberBetween(1, 5);
-            $value->Value = $faker->randomFloat($nbMaxDecimals = 3, $min = 20, $max = 300);
+            $value->Counter_id = $counter_id;
+            $value->Value = $current_value;
             $value->Date = null;
             $value->save(false);
         }
