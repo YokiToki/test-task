@@ -19,6 +19,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'LoWqpR4G2Tjf9Ay2EVTyNOTBgNOyDRJV',
+            'enableCsrfValidation' => false,
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ]
@@ -76,7 +77,20 @@ $config = [
                         'GET,HEAD {counter_id}' => 'view',
                         'POST' => 'create',
                         'DELETE {counter_id}' => 'delete',
-                        'PUT {counter_id}' => 'update',
+                        'PUT,PATCH {counter_id}' => 'update',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'values',
+                    'prefix' => '/api/',
+                    'tokens' => [
+                        '{counter_id}' => '<counter_id:\\d+>',
+                    ],
+                    'patterns' => [
+                        'POST {counter_id}' => 'index',
+                        'DELETE {counter_id}' => 'delete',
+                        'PUT,PATCH {counter_id}' => 'update',
                     ],
                 ],
             ],
