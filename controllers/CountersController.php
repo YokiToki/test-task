@@ -77,6 +77,10 @@ class CountersController extends \yii\rest\Controller
     {
         $counter = Counters::findOne($counter_id);
 
+        if(is_null($counter)) {
+            throw new \yii\web\NotFoundHttpException('Счетчик не найден');
+        }
+
         if ($counter->delete() === false && !$counter->hasErrors()) {
             throw new \yii\web\ServerErrorHttpException('Ошибка удаления счетчика');
         }
@@ -93,6 +97,11 @@ class CountersController extends \yii\rest\Controller
     public function actionUpdate($counter_id)
     {
         $counter = Counters::findOne($counter_id);
+
+        if(is_null($counter)) {
+            throw new \yii\web\NotFoundHttpException('Счетчик не найден');
+        }
+
         $counter->load(\Yii::$app->getRequest()->getBodyParams(), '');
 
         if ($counter->save() === false && !$counter->hasErrors()) {
