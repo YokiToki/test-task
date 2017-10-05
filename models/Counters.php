@@ -28,7 +28,8 @@ class Counters extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Serial_number'], 'required'],
+            [['Serial_number'], 'unique'],
+            [['Serial_number', 'Name'], 'required'],
             [['Date_install'], 'safe'],
             [['Serial_number', 'Name'], 'string', 'max' => 255],
         ];
@@ -45,5 +46,10 @@ class Counters extends \yii\db\ActiveRecord
             'Name' => 'Name',
             'Date_install' => 'Date Install',
         ];
+    }
+
+    public function getValues()
+    {
+        return $this->hasMany(Values::className(), ['Counter_id' => 'Counter_id']);
     }
 }
