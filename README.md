@@ -38,3 +38,12 @@ php yii monthly-expense 3
 // <- По счетчику 3 расход за этот месяц составляет 169.683 куб. м.
 
 ```
+
+### Воркспейс для Insomia REST client
+Для использоваия [Insomnia](https://insomnia.rest/) нужно импортировать [воркспейс](Test-task_2017-10-06.json) и указать переменную окружения `host`
+```
+{
+	host: "example.com"
+}
+
+```
