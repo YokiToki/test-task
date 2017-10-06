@@ -47,7 +47,7 @@ class ValuesController extends \yii\web\Controller
             ->one();
 
         if (is_null($value)) {
-            throw new \yii\web\ForbiddenHttpException('Нет показаний для удаления');
+            throw new \yii\web\BadRequestHttpException('Нет показаний для удаления');
         }
 
         if ($value->delete() === false && !$value->hasErrors()) {
