@@ -52,4 +52,12 @@ class Counters extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Values::className(), ['Counter_id' => 'Counter_id']);
     }
+
+    public function deleteWithValues() {
+        if($this->delete()) {
+            return Values::deleteAll(['Counter_id' => $this->Counter_id]);
+        }
+
+        return false;
+    }
 }

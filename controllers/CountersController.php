@@ -81,7 +81,7 @@ class CountersController extends \yii\rest\Controller
             throw new \yii\web\NotFoundHttpException('Счетчик не найден');
         }
 
-        if ($counter->delete() === false && !$counter->hasErrors()) {
+        if ($counter->deleteWithValues() === false && !$counter->hasErrors()) {
             throw new \yii\web\ServerErrorHttpException('Ошибка удаления счетчика');
         }
 
