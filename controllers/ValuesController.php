@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use \app\models\Values;
 
-class ValuesController extends \yii\web\Controller
+class ValuesController extends \yii\rest\Controller
 {
     /**
      * Вносит показания в базу данных
