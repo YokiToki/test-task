@@ -16,12 +16,12 @@ class MonthlyExpenseController extends Controller
     {
         $value = Values::find()
             ->select('Value')
-            ->andWhere('MONTH(`Date`) = MONTH(CURRENT_DATE())')
-            ->andWhere('AND YEAR(`Date`) = YEAR(CURRENT_DATE())')
             ->where(['Counter_id' => $counter_id])
+            ->andWhere('MONTH(`Date`) = MONTH(CURRENT_DATE())')
+            ->andWhere('YEAR(`Date`) = YEAR(CURRENT_DATE())')
             ->asArray()
             ->all();
-
+        
         $result = 0;
         $count = count($value);
         $msg = "По счетчику %d расход за этот месяц составляет %g куб. м.";
